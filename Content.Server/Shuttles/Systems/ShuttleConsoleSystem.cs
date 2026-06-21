@@ -673,7 +673,8 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
                 NetEntity.Invalid,
                 true,
                 portNames,
-                GetExclusionList()); // Frontier: add inertial dampening, target // Lua add GetExclusionList
+                GetExclusionList(), // Frontier: add inertial dampening, target // Lua add GetExclusionList
+                jammed: false); // Callisto Nebula's Tweak
         }
 
         var netCoords = GetNetCoordinatesSafe(coordinates);
@@ -697,7 +698,8 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             targetNetEntity, // Frontier
             entity.Comp1.HideTarget, // Frontier
             portNames,
-            GetExclusionList()); // Lua
+            GetExclusionList(), // Lua
+            jammed: entity.Comp1.Jammed); // Callisto Nebula's Tweak
     }
 
     private NetCoordinates GetNetCoordinatesSafe(EntityCoordinates coordinates)

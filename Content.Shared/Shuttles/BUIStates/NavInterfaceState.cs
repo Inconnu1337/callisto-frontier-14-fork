@@ -70,6 +70,9 @@ public sealed class NavInterfaceState
     /// </summary>
     public bool HideTarget = true;
     // End Frontier fields
+
+    public bool Jammed = false; // Callisto Nebula's Tweak
+
     public NavInterfaceState(
         float maxRange,
         NetCoordinates? coordinates,
@@ -81,7 +84,9 @@ public sealed class NavInterfaceState
         NetEntity? targetEntity, // Frontier
         bool hideTarget, // Frontier
         Dictionary<string, string>? networkPortNames = null,
-        List<ShuttleExclusionObject>? exclusions = null)
+        List<ShuttleExclusionObject>? exclusions = null,
+        bool jammed = false // Callisto Nebula's Tweak
+    )
     {
         MaxRange = maxRange;
         Coordinates = coordinates;
@@ -94,6 +99,7 @@ public sealed class NavInterfaceState
         HideTarget = hideTarget; // Frontier
         NetworkPortNames = networkPortNames ?? new Dictionary<string, string>();
         Exclusions = exclusions ?? new List<ShuttleExclusionObject>();
+        Jammed = jammed; // Callisto Nebula's Tweak
     }
 }
 

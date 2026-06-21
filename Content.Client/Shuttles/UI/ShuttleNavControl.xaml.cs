@@ -71,6 +71,9 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
     public bool ShowDocks { get; set; } = true;
     public bool RotateWithEntity { get; set; } = true;
 
+    public bool IsJammed { get; set; } // Callisto Nebula's Tweak
+    private double _jamNoiseAccumSeconds; // Callisto Nebula's Tweak
+
     /// <summary>
     ///   If present, called for every IFF. Must determine if it should or should not be shown.
     /// </summary>
@@ -182,6 +185,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
         _radarExclusions = state.Exclusions; // Lua
 
+        IsJammed = state.Jammed; // Callisto Nebula's Tweak
         NFUpdateState(state); // Frontier Update State
     }
 
@@ -202,6 +206,14 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
         DrawBacking(handle);
         DrawCircles(handle);
+
+        // Callisto Nebula's Tweak Start
+        if (IsJammed)
+        {
+            DrawJammed(handle);
+            return;
+        }
+        // Callisto Nebula's Tweak End
 
         // No data
         if (_coordinates == null || _rotation == null)
@@ -910,6 +922,36 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
     private const int RadarBlipSize = 15;
     private const int RadarFontSize = 8;
+
+    // Callisto Nebula's Tweak Start
+    private static readonly Color JamColorDim = new(40, 40, 40);
+    private static readonly Color JamColorBright = new(90, 90, 90);
+
+    private readonly Random _jamRng = new();
+
+    private void DrawJammed(DrawingHandleScreen handle)
+    {
+        _jamNoiseAccumSeconds += Timing.FrameTime.TotalSeconds;
+
+        const int noiseLines = 14;
+        for (var i = 0; i < noiseLines; i++)
+        {
+            var y = (float)_jamRng.NextDouble() * Size.Y;
+            var xStart = (float)_jamRng.NextDouble() * Size.X;
+            var length = (float)_jamRng.NextDouble() * Size.X * 0.4f;
+            var bright = _jamRng.NextDouble() > 0.7;
+            handle.DrawLine(
+                new Vector2(xStart, y),
+                new Vector2(MathF.Min(xStart + length, Size.X), y),
+                bright ? JamColorBright : JamColorDim);
+        }
+
+        var label = Loc.GetString("shuttle-console-radar-jammed");
+        var dimensions = handle.GetDimensions(Font, label, 1f);
+        var labelPos = (Size / 2f) - dimensions / 2f;
+        handle.DrawString(Font, labelPos, label, 1f, Color.Red);
+    }
+    // Callisto Nebula's Tweak End
 
     private void DrawShields(DrawingHandleScreen handle, TransformComponent consoleXform, Matrix3x2 matrix)
     {

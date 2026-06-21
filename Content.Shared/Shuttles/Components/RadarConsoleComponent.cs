@@ -66,4 +66,9 @@ public sealed partial class RadarConsoleComponent : Component
     [DataField]
     public bool RelativePanning = false;
     // </Mono>
+
+    // Callisto Nebula's Tweak Start
+    [DataField, AutoNetworkedField]
+    public bool Jammed;
+    // Callisto Nebula's Tweak End
 }

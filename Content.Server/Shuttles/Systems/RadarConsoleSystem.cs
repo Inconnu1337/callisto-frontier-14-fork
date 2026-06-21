@@ -72,9 +72,16 @@ public sealed partial class RadarConsoleSystem : SharedRadarConsoleSystem // Fro
             state.TargetEntity = GetNetEntity(component.TargetEntity);
             state.HideTarget = component.HideTarget;
             // End Frontier
+            state.Jammed = component.Jammed; // Callisto Nebula's Tweak
 
             _uiSystem.SetUiState(uid, RadarConsoleUiKey.Key, new NavBoundUserInterfaceState(state));
         }
+        // Callisto Nebula's Tweak Start
+        if (HasComp<ShuttleConsoleComponent>(uid) && xform.GridUid != null)
+        {
+            _console.RefreshShuttleConsoles(xform.GridUid.Value);
+        }
+        // Callisto Nebula's Tweak End
     }
 
     // Frontier: settable waypoints

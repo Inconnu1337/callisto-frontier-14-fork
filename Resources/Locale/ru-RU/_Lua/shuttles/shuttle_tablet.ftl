@@ -17,3 +17,5 @@ shuttle-tablet-link-power = Стабильность соединения: {$lin
 shuttle-tablet-footer-right = v0.11d
 
 shuttle-tablet-id-slot = Слот ID карты
+
+shuttle-console-radar-jammed = Сигнал потерян

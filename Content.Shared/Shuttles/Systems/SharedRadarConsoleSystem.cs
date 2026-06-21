@@ -19,4 +19,16 @@ public abstract class SharedRadarConsoleSystem : EntitySystem
         Dirty(uid, component);
         UpdateState(uid, component);
     }
+
+    // Callisto Nebula's Tweak Start
+    public void SetJammed(EntityUid uid, bool jammed, RadarConsoleComponent component)
+    {
+        if (component.Jammed == jammed)
+            return;
+
+        component.Jammed = jammed;
+        Dirty(uid, component);
+        UpdateState(uid, component);
+    }
+    // Callisto Nebula's Tweak End
 }
