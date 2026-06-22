@@ -18,4 +18,4 @@ shuttle-tablet-footer-right = v0.11d
 
 shuttle-tablet-id-slot = Слот ID карты
 
-shuttle-console-radar-jammed = Сигнал потерян
+shuttle-console-radar-jammed = Присутствуют электромагнитные помехи

@@ -5,6 +5,7 @@ using Content.Server.Radio.EntitySystems;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Systems;
+using Content.Server._IDK.Nebula.Components;
 using Content.Server._Lua.Shuttles.Systems; // Lua
 using Content.Shared._Lua.Shuttles.Components; // Lua
 using Content.Shared._Lua.Starmap;
@@ -686,6 +687,14 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         {
             targetNetEntity = targetNetMaybe.Value;
         }
+
+        // Callisto Nebula's Tweak Start
+        if (entity.Comp2 != null && entity.Comp2.GridUid != null &&
+            TryComp<IonNebulaAffectedComponent>(entity.Comp2.GridUid.Value, out var ionComp))
+        {
+            angle += ionComp.RadarAngleOffset;
+        }
+        // Callisto Nebula's Tweak End
 
         return new NavInterfaceState(
             entity.Comp1.MaxRange,

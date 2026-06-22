@@ -803,4 +803,25 @@ public sealed class ThrusterSystem : EntitySystem
     {
         return (int)Math.Log2((int)flag);
     }
+
+    // Callisto Nebula's Tweak Start
+    public void SetThrust(EntityUid uid, float thrust, ThrusterComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp))
+            return;
+
+        if (MathHelper.CloseTo(comp.Thrust, thrust))
+            return;
+
+        if (comp.IsOn)
+            DisableThruster(uid, comp);
+
+        comp.Thrust = thrust;
+
+        if (comp.Enabled && CanEnable(uid, comp))
+            EnableThruster(uid, comp);
+
+        Dirty(uid, comp);
+    }
+    // Callisto Nebula's Tweak End
 }
