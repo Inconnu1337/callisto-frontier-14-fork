@@ -1,8 +1,7 @@
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
-using Robust.Shared.Serialization;
 
-namespace Content.Server._IDK.Nebula.Effects;
+namespace Content.Server._Callisto.Nebula.Effects;
 
 public sealed partial class ElectricNebulaEffect : NebulaEffect
 {

@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Server._IDK.Nebula.Components;
+namespace Content.Server._Callisto.Nebula.Components;
 
 [RegisterComponent]
 public sealed partial class IonNebulaAffectedComponent : Component

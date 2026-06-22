@@ -1,0 +1,57 @@
+
+light_mode unshaded;
+
+uniform highp vec2 clearHalfSize;
+uniform highp vec2 fullHalfSize;
+uniform highp vec2 centerOffset;
+uniform highp float overlayAlpha;
+uniform highp float noiseStrength;
+uniform highp float noiseScale;
+
+highp float hash21(highp vec2 p)
+{
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+}
+
+highp float edgeNoise(highp vec2 p, highp float t)
+{
+    highp vec2 cell = floor(p);
+    highp vec2 f = fract(p);
+
+    highp float a = hash21(cell);
+    highp float b = hash21(cell + vec2(1.0, 0.0));
+    highp float c = hash21(cell + vec2(0.0, 1.0));
+    highp float d = hash21(cell + vec2(1.0, 1.0));
+
+    highp vec2 u = f * f * (3.0 - 2.0 * f);
+    highp float n = mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+
+    n += 0.15 * sin(t * 0.3 + p.x * 0.7 + p.y * 0.5);
+    return n;
+}
+
+void fragment()
+{
+    highp vec2 pixelSize = vec2(1.0 / SCREEN_PIXEL_SIZE.x, 1.0 / SCREEN_PIXEL_SIZE.y);
+    highp vec2 pixelCenter = pixelSize * 0.5 + centerOffset;
+    highp vec2 boxDelta = abs(FRAGCOORD.xy - pixelCenter);
+
+    highp vec2 fadeSize = max(fullHalfSize - clearHalfSize, vec2(1.0, 1.0));
+    highp vec2 axisT = clamp((boxDelta - clearHalfSize) / fadeSize, vec2(0.0), vec2(1.0));
+    highp float boxT = max(axisT.x, axisT.y);
+
+    highp float n = edgeNoise(UV * noiseScale * 10.0, TIME) - 0.5;
+    boxT = clamp(boxT + n * noiseStrength, 0.0, 1.0);
+
+    highp float darkness = boxT * boxT * (3.0 - 2.0 * boxT);
+
+    highp float grain = hash21(FRAGCOORD.xy * SCREEN_PIXEL_SIZE * 340.0 + TIME * 0.05);
+    highp float grainAmount = 0.04 * darkness;
+
+    highp vec3 voidColor = vec3(0.002, 0.003, 0.006) + grain * grainAmount;
+
+    highp float alpha = clamp(darkness * overlayAlpha, 0.0, 1.0);
+    COLOR = vec4(voidColor, alpha);
+}

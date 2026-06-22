@@ -5,7 +5,7 @@ using Content.Server.Radio.EntitySystems;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Systems;
-using Content.Server._IDK.Nebula.Components;
+using Content.Server._Callisto.Nebula.Components;
 using Content.Server._Lua.Shuttles.Systems; // Lua
 using Content.Shared._Lua.Shuttles.Components; // Lua
 using Content.Shared._Lua.Starmap;

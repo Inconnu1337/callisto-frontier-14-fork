@@ -1,4 +1,4 @@
-namespace Content.Shared._IDK.Nebula;
+namespace Content.Shared._Callisto.Nebula;
 
 [ByRefEvent]
 public readonly record struct ShuttleEnteredNebulaEvent(EntityUid Nebula, EntityUid Shuttle);

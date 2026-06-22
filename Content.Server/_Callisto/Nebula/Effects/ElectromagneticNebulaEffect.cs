@@ -1,8 +1,7 @@
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
-using Robust.Shared.Serialization;
 
-namespace Content.Server._IDK.Nebula.Effects;
+namespace Content.Server._Callisto.Nebula.Effects;
 
 public sealed partial class ElectromagneticNebulaEffect : NebulaEffect
 {
@@ -11,8 +10,8 @@ public sealed partial class ElectromagneticNebulaEffect : NebulaEffect
 
     public override void OnShuttleEntered(Entity<NebulaComponent> nebula, EntityUid shuttle, EntityManager entManager)
     {
-        _radar = entManager.System<SharedRadarConsoleSystem>();
-        _lookup = entManager.System<EntityLookupSystem>();
+        _radar ??= entManager.System<SharedRadarConsoleSystem>();
+        _lookup ??= entManager.System<EntityLookupSystem>();
 
         var consoles = new HashSet<Entity<RadarConsoleComponent>>();
         _lookup.GetGridEntities<RadarConsoleComponent>(shuttle, consoles);
@@ -25,9 +24,6 @@ public sealed partial class ElectromagneticNebulaEffect : NebulaEffect
 
     public override void OnShuttleExited(Entity<NebulaComponent> nebula, EntityUid shuttle, EntityManager entManager)
     {
-        _radar = entManager.System<SharedRadarConsoleSystem>();
-        _lookup = entManager.System<EntityLookupSystem>();
-
         var consoles = new HashSet<Entity<RadarConsoleComponent>>();
         _lookup.GetGridEntities<RadarConsoleComponent>(shuttle, consoles);
 

@@ -1,7 +1,7 @@
-using Content.Server._IDK.Nebula.Effects;
+using Content.Server._Callisto.Nebula.Effects;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Server._IDK.Nebula;
+namespace Content.Server._Callisto.Nebula;
 
 [RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class NebulaComponent : Component
@@ -17,6 +17,9 @@ public sealed partial class NebulaComponent : Component
 
     [ViewVariables]
     public HashSet<EntityUid> ShuttlesInside = new();
+
+    [ViewVariables]
+    public HashSet<EntityUid> PlayersInside = new();
 
     [DataField]
     public List<NebulaEffect> Effects = new();

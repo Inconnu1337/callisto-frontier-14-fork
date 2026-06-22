@@ -1,4 +1,4 @@
-using Content.Server._IDK.Nebula.Components;
+using Content.Server._Callisto.Nebula.Components;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Shuttles.Components;
@@ -6,7 +6,7 @@ using Content.Server.Shuttles.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Server._IDK.Nebula.Effects;
+namespace Content.Server._Callisto.Nebula.Effects;
 
 public sealed partial class IonNebulaEffect : NebulaEffect
 {

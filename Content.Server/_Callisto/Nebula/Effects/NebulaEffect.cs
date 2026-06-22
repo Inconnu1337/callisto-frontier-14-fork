@@ -1,6 +1,4 @@
-using Robust.Shared.Serialization;
-
-namespace Content.Server._IDK.Nebula.Effects;
+namespace Content.Server._Callisto.Nebula.Effects;
 
 [ImplicitDataDefinitionForInheritors]
 public abstract partial class NebulaEffect

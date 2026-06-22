@@ -1,0 +1,4 @@
+- type: shader
+  id: VoidNebulaOverlay
+  kind: source
+  path: /Textures/_Callisto/Shaders/void_nebula.swsl
