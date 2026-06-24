@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server._Callisto.Nebula.Components;
+using Content.Server._Callisto.Nebula.Effects;
 using Content.Server.Radio;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Callisto.Nebula;
@@ -102,6 +103,9 @@ public sealed class NebulaSystem : EntitySystem
             RaiseLocalEvent(uid, ref ev);
             return true;
         });
+
+        if (!nebula.Effects.Any(effect => effect is VoidNebulaEffect))
+            return;
 
         var netNebula = GetNetEntity(uid);
         var source = new VoidNebulaSource(netNebula, worldPos, nebula.Radius);
