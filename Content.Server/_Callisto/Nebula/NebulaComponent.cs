@@ -15,6 +15,9 @@ public sealed partial class NebulaComponent : Component
     [DataField]
     public TimeSpan CheckInterval = TimeSpan.FromSeconds(1.5);
 
+    [DataField]
+    public TimeSpan DespawnTime = TimeSpan.FromMinutes(30);
+
     [ViewVariables]
     public HashSet<EntityUid> ShuttlesInside = new();
 

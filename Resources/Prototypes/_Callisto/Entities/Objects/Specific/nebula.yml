@@ -1,0 +1,88 @@
+- type: entity
+  id: NebulaBase
+  abstract: true
+  components:
+    - type: Nebula
+
+- type: entity
+  id: NebulaElectric
+  parent: NebulaBase
+  name: electric nebula
+  components:
+    - type: Nebula
+      radius: 300
+      effects:
+        - !type:ElectricNebulaEffect
+
+- type: entity
+  id: NebulaElectromagnetic
+  parent: NebulaBase
+  name: electromagnetic nebula
+  components:
+    - type: Nebula
+      radius: 600
+      effects:
+        - !type:ElectromagneticNebulaEffect
+
+- type: entity
+  id: NebulaRadiation
+  parent: NebulaBase
+  name: radiation nebula
+  components:
+    - type: Nebula
+      radius: 300
+    - type: RadiationNebula
+
+- type: entity
+  id: NebulaIon
+  parent: NebulaBase
+  name: ion nebula
+  components:
+    - type: Nebula
+      radius: 600
+      effects:
+        - !type:IonNebulaEffect
+
+- type: entity
+  id: NebulaVoid
+  parent: NebulaBase
+  name: void nebula
+  components:
+    - type: VoidNebula
+    - type: Nebula
+      radius: 500
+      effects:
+        - !type:VoidNebulaEffect
+
+- type: entity
+  id: NebulaPlasma
+  parent: NebulaBase
+  name: plasma nebula
+  components:
+    - type: Nebula
+      radius: 200
+      effects:
+        - !type:PlasmaNebulaEffect
+
+- type: entityTable
+  id: CallistoNebulaSpawnTable
+  table: !type:GroupSelector
+    children:
+      - !type:EntSelector
+        id: NebulaPlasma
+        weight: 1
+      - !type:EntSelector
+        id: NebulaIon
+        weight: 1
+      - !type:EntSelector
+        id: NebulaElectromagnetic
+        weight: 1
+      - !type:EntSelector
+        id: NebulaElectric
+        weight: 1
+      - !type:EntSelector
+        id: NebulaRadiation
+        weight: 1
+      - !type:EntSelector
+        id: NebulaVoid
+        weight: 1
